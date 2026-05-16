@@ -1,0 +1,69 @@
+<%- include('partials/head.html') %>
+<%- include('partials/header.html') %>
+
+<main>
+  <section class="section">
+    <div class="container">
+
+      <p class="section-label">Seus itens</p>
+      <h1 class="section-title" style="margin-bottom:24px;">Carrinho</h1>
+
+      <% if (!hasItems) { %>
+        <div class="empty-state">
+          <div class="empty-icon">🛒</div>
+          <p class="empty-title">Seu carrinho está vazio</p>
+          <p class="empty-sub">Adicione itens do cardápio</p>
+          <a href="/cardapio" class="btn btn-primary">Ver Cardápio</a>
+        </div>
+
+      <% } else { %>
+        <div class="cart-layout">
+          <div id="cart-items-list">
+            <% cart.forEach(item => { %>
+              <div class="cart-item" data-item="<%= item.id %>">
+                <div class="cart-emoji">
+                  <% if (item.image) { %>
+                    <img src="/images/<%= item.image %>" alt="<%= item.name %>"/>
+                  <% } else { %>
+                    <%= item.emoji %>
+                  <% } %>
+                </div>
+                <div class="cart-item-info">
+                  <p class="cart-item-name"><%= item.name %></p>
+                  <p class="cart-item-price">R$ <%= item.price.toFixed(2) %> / un.</p>
+                </div>
+                <div class="qty-control">
+                  <button class="qty-btn" data-qty="dec" data-id="<%= item.id %>">−</button>
+                  <span class="qty-val"><%= item.qty %></span>
+                  <button class="qty-btn" data-qty="inc" data-id="<%= item.id %>">+</button>
+                </div>
+                <span class="cart-subtotal">R$ <%= (item.price * item.qty).toFixed(2) %></span>
+                <button class="remove-btn" data-qty="remove" data-id="<%= item.id %>" title="Remover">🗑</button>
+              </div>
+            <% }) %>
+          </div>
+
+          <div class="cart-summary">
+            <p class="form-card-title" style="margin-bottom:16px;">Resumo</p>
+            <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">R$ <%= subtotal %></span></div>
+            <div class="summary-row"><span>Entrega</span><span>R$ <%= deliveryFee %></span></div>
+            <div class="divider" style="margin:12px 0;"></div>
+            <div class="summary-total">
+              <span>Total</span>
+              <span class="val" id="cart-total">R$ <%= total %></span>
+            </div>
+            <div style="margin-top:20px;">
+              <a href="/checkout" class="btn btn-primary btn-full">Finalizar Pedido</a>
+            </div>
+            <div style="margin-top:10px;">
+              <a href="/cardapio" class="btn btn-outline btn-full">Continuar Comprando</a>
+            </div>
+          </div>
+        </div>
+      <% } %>
+
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer.html') %>

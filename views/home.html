@@ -1,0 +1,138 @@
+<%- include('partials/head.html') %>
+<%- include('partials/header.html') %>
+
+<%
+  // Imagem representativa por categoria (primeiro produto da categoria)
+  const catRepImg = {
+    burgers:  'smash_classico.png',
+    combos:   'combo_classico.png',
+    drinks:   'milkshake_baunilha.png',
+    desserts: 'brownie_quente.png',
+  };
+%>
+
+<main>
+  <section class="hero">
+    <div class="container">
+
+      <div class="hero-slide hero-inner">
+        <div class="hero-text">
+          <span class="badge">Hambúrgueres Artesanais</span>
+          <h1 class="display display-xl hero-headline">
+            Feito pra<br><span class="text-yellow">incomodar</span><br>a fome.
+          </h1>
+          <p class="hero-sub">Blend exclusivo, ingredientes selecionados e muito molho.</p>
+          <div class="hero-actions">
+            <a href="/cardapio" class="btn btn-primary">Ver Cardápio</a>
+            <a href="/pedidos"  class="btn btn-outline">Meus Pedidos</a>
+          </div>
+        </div>
+        <div class="burger-circle">
+          <img src="/images/smash_classico.png" alt="Smash Clássico" loading="eager"/>
+        </div>
+      </div>
+
+      
+      <div class="hero-slide hero-inner">
+        <div class="hero-text">
+          <span class="badge">Promoção do Dia</span>
+          <h1 class="display display-xl hero-headline">
+            Combos<br><span class="text-yellow">irresistíveis</span>
+          </h1>
+          <p class="hero-sub">Burger + fritas + bebida com preço especial. Chega mais.</p>
+          <div class="hero-actions">
+            <a href="/cardapio?cat=combos" class="btn btn-primary">Ver Combos</a>
+          </div>
+        </div>
+        <div class="burger-circle">
+          <img src="/images/combo_classico.png" alt="Combo Clássico" loading="lazy"/>
+        </div>
+      </div>
+
+      
+      <div class="hero-slide hero-inner">
+        <div class="hero-text">
+          <span class="badge">Novidade</span>
+          <h1 class="display display-xl hero-headline">
+            Sobremesas<br><span class="text-yellow">pra finalizar</span>
+          </h1>
+          <p class="hero-sub">Brownies e sorvetes artesanais que vão fechar o jantar com chave de ouro.</p>
+          <div class="hero-actions">
+            <a href="/cardapio?cat=desserts" class="btn btn-primary">Ver Sobremesas</a>
+          </div>
+        </div>
+        <div class="burger-circle">
+          <img src="/images/brownie_quente.png" alt="Brownie Quente" loading="lazy"/>
+        </div>
+      </div>
+
+    </div>
+    <div class="carousel-dots">
+      <button class="dot active"></button>
+      <button class="dot"></button>
+      <button class="dot"></button>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">O que temos</p>
+      <h2 class="section-title" style="margin-bottom:24px;">Categorias</h2>
+
+      <div class="cat-grid">
+        <% categories.forEach(cat => { %>
+          <a href="/cardapio?cat=<%= cat.id %>" class="cat-card">
+            <div class="cat-icon-wrap" style="overflow:hidden;">
+              <img
+                src="/images/<%= catRepImg[cat.id] %>"
+                alt="<%= cat.name %>"
+                loading="lazy"
+                style="width:100%;height:100%;object-fit:contain;padding:4px;"
+              />
+            </div>
+            <div class="cat-name"><%= cat.name %></div>
+            <div class="cat-sub"><%= cat.subtitle %></div>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Destaque</p>
+      <h2 class="section-title" style="margin-bottom:24px;">Mais Pedidos</h2>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <% featured.forEach(p => { %>
+          <div class="featured-card">
+            <div class="featured-thumb">
+              <img src="/images/<%= p.image %>" alt="<%= p.name %>" loading="lazy"/>
+            </div>
+            <div class="featured-info">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                <span class="product-name"><%= p.name %></span>
+                <span class="badge-solid">Popular</span>
+              </div>
+              <p class="product-desc"><%= p.desc %></p>
+              <div class="featured-footer">
+                <span class="product-price">R$ <%= p.price.toFixed(2) %></span>
+                <button class="add-btn" data-add="<%= p.id %>">+ Adicionar</button>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+
+      <div style="margin-top:28px;">
+        <a href="/cardapio" class="btn btn-primary btn-full">Ver Cardápio Completo</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer.html') %>

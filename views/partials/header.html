@@ -1,0 +1,26 @@
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo">YAG-GO</a>
+
+      <nav class="nav" id="main-nav">
+        <a href="/"          class="nav-link <%= active==='home'   ? 'active' : '' %>">Início</a>
+        <a href="/cardapio"  class="nav-link <%= active==='menu'   ? 'active' : '' %>">Cardápio</a>
+        <a href="/pedidos"   class="nav-link <%= active==='orders' ? 'active' : '' %>">Pedidos</a>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:10px;">
+        <a href="/carrinho" class="cart-btn">
+          🛒
+          <span class="cart-badge">
+            <span class="cart-count"><%= cartCount %></span>
+          </span>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="divider"></div>

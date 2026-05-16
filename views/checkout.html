@@ -1,0 +1,109 @@
+<%- include('partials/head.html') %>
+<%- include('partials/header.html') %>
+
+<main>
+  <section class="section">
+    <div class="container">
+
+      <p class="section-label">Finalize seu pedido</p>
+      <h1 class="section-title" style="margin-bottom:24px;">Checkout</h1>
+
+      <form method="POST" action="/checkout" novalidate>
+        <div class="checkout-layout">
+          <div>
+
+            <!-- resumo -->
+            <div class="form-card">
+              <p class="form-card-title">Resumo do Pedido</p>
+              <% cartItems.forEach(item => { %>
+                <div style="display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;">
+                  <div class="item-thumb">
+                    <% if (item.image) { %>
+                      <img src="/images/<%= item.image %>" alt="<%= item.name %>"/>
+                    <% } else { %>
+                      <span style="font-size:18px;"><%= item.emoji %></span>
+                    <% } %>
+                  </div>
+                  <span style="flex:1;"><%= item.qty %>x <%= item.name %></span>
+                  <span style="color:var(--gray);white-space:nowrap;">R$ <%= (item.price * item.qty).toFixed(2) %></span>
+                </div>
+              <% }) %>
+              <div class="divider" style="margin:12px 0;"></div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--gray);margin-bottom:4px;">
+                <span>Subtotal</span><span>R$ <%= subtotal %></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--gray);margin-bottom:10px;">
+                <span>Entrega</span><span>R$ <%= deliveryFee %></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:500;">
+                <span>Total</span>
+                <span style="color:var(--yellow);">R$ <%= total %></span>
+              </div>
+            </div>
+
+            <!-- entrega -->
+            <div class="form-card">
+              <p class="form-card-title">Dados de Entrega</p>
+              <div class="form-group">
+                <label class="form-label" for="name">Nome completo</label>
+                <input class="form-input <%= errors.name ? 'error' : '' %>"
+                  type="text" id="name" name="name"
+                  placeholder="João da Silva" value="<%= form.name || '' %>"/>
+                <% if (errors.name) { %><p class="form-error"><%= errors.name %></p><% } %>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="phone">Telefone</label>
+                <input class="form-input <%= errors.phone ? 'error' : '' %>"
+                  type="tel" id="phone" name="phone"
+                  placeholder="(11) 9 9999-9999" value="<%= form.phone || '' %>"/>
+                <% if (errors.phone) { %><p class="form-error"><%= errors.phone %></p><% } %>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="address">Endereço</label>
+                <input class="form-input <%= errors.address ? 'error' : '' %>"
+                  type="text" id="address" name="address"
+                  placeholder="Rua, número, bairro" value="<%= form.address || '' %>"/>
+                <% if (errors.address) { %><p class="form-error"><%= errors.address %></p><% } %>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label class="form-label" for="complement">Complemento (opcional)</label>
+                <input class="form-input" type="text" id="complement" name="complement"
+                  placeholder="Apto, bloco..." value="<%= form.complement || '' %>"/>
+              </div>
+            </div>
+
+            <!-- pagamento -->
+            <div class="form-card">
+              <p class="form-card-title">Forma de Pagamento</p>
+              <label class="pay-option"><input type="radio" name="payment" value="card" checked/><span class="pay-icon">💳</span>Cartão de crédito/débito</label>
+              <label class="pay-option"><input type="radio" name="payment" value="pix"/><span class="pay-icon">⚡</span>Pix</label>
+              <label class="pay-option"><input type="radio" name="payment" value="cash"/><span class="pay-icon">💵</span>Dinheiro na entrega</label>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="cart-summary" style="top:80px;">
+              <p class="form-card-title" style="margin-bottom:16px;">Confirmar Pedido</p>
+              <div class="summary-row"><span>Subtotal</span><span>R$ <%= subtotal %></span></div>
+              <div class="summary-row"><span>Entrega</span><span>R$ <%= deliveryFee %></span></div>
+              <div class="divider" style="margin:12px 0;"></div>
+              <div class="summary-total"><span>Total</span><span class="val">R$ <%= total %></span></div>
+              <div style="margin-top:20px;">
+                <button type="submit" class="btn btn-primary btn-full" style="font-size:14px;">
+                  Confirmar &bull; R$ <%= total %>
+                </button>
+              </div>
+              <div style="margin-top:10px;">
+                <a href="/carrinho" class="btn btn-outline btn-full">← Voltar ao Carrinho</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer.html') %>

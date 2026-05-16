@@ -1,0 +1,54 @@
+<%- include('partials/head.html') %>
+<%- include('partials/header.html') %>
+
+<main>
+  <section class="section">
+    <div class="container">
+
+      <p class="section-label">Escolha seu favorito</p>
+      <h1 class="section-title" style="margin-bottom:24px;">Cardápio</h1>
+
+      <div class="cat-filters">
+        <% categories.forEach(cat => { %>
+          <a href="/cardapio?cat=<%= cat.id %>"
+             class="cat-filter <%= selectedCat === cat.id ? 'active' : '' %>"
+          ><%= cat.name %></a>
+        <% }) %>
+      </div>
+
+      <% if (products.length === 0) { %>
+        <div class="empty-state">
+          <div class="empty-icon">🍽️</div>
+          <p class="empty-title">Nenhum produto encontrado</p>
+        </div>
+      <% } else { %>
+        <div class="product-grid">
+          <% products.forEach(p => { %>
+            <div class="product-card">
+              <div class="product-thumb">
+                <img src="/images/<%= p.image %>" alt="<%= p.name %>" loading="lazy"/>
+                <% if (p.popular) { %>
+                  <span class="badge-solid" style="position:absolute;top:10px;left:10px;">Popular</span>
+                <% } %>
+              </div>
+              <div class="product-info">
+                <p class="product-name"><%= p.name %></p>
+                <p class="product-desc"><%= p.desc %></p>
+                <div class="product-footer">
+                  <span class="product-price">R$ <%= p.price.toFixed(2) %></span>
+                  <button
+                    class="add-btn <%= cartIds.includes(p.id) ? 'added' : '' %>"
+                    data-add="<%= p.id %>"
+                  ><%= cartIds.includes(p.id) ? '✓ Adicionado' : '+ Adicionar' %></button>
+                </div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+
+    </div>
+  </section>
+</main>
+
+<%- include('partials/footer.html') %>

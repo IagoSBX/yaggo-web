@@ -1,0 +1,46 @@
+<%- include('partials/head.html') %>
+<%- include('partials/header.html') %>
+
+<main>
+  <div class="confirm-wrap">
+    <div class="confirm-icon">✅</div>
+    <h1 class="display display-md" style="margin-bottom:10px;">Pedido Confirmado!</h1>
+    <p style="font-size:14px;color:var(--gray);line-height:1.7;">
+      Seu pedido foi recebido e já está sendo preparado com muito carinho.
+    </p>
+    <div class="confirm-id-badge">🧾 Pedido #<%= order.id %></div>
+
+    <div style="margin-top:24px;background:var(--black2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:left;">
+      <p style="font-size:11px;color:var(--yellow);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Detalhes</p>
+      <% order.items.forEach(item => { %>
+        <div style="display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13px;">
+          <div class="item-thumb">
+            <% if (item.image) { %>
+              <img src="/images/<%= item.image %>" alt="<%= item.name %>"/>
+            <% } else { %>
+              <span style="font-size:18px;"><%= item.emoji %></span>
+            <% } %>
+          </div>
+          <span style="flex:1;"><%= item.qty %>x <%= item.name %></span>
+          <span style="color:var(--gray);">R$ <%= (item.price * item.qty).toFixed(2) %></span>
+        </div>
+      <% }) %>
+      <div style="height:1px;background:var(--border);margin:10px 0;"></div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;font-weight:500;">
+        <span>Total</span>
+        <span style="color:var(--yellow);">R$ <%= order.total %></span>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:var(--gray);">📍 <%= order.address %></div>
+    </div>
+
+    <div style="margin-top:16px;background:var(--yellow-dim);border:1px solid var(--yellow-border);border-radius:8px;padding:10px 16px;font-size:13px;color:var(--yellow);">
+      🕐 Previsão de entrega: <strong>30–45 minutos</strong>
+    </div>
+    <div style="margin-top:32px;display:flex;flex-direction:column;gap:10px;">
+      <a href="/pedidos" class="btn btn-primary btn-full">Ver Meus Pedidos</a>
+      <a href="/"        class="btn btn-outline btn-full">Voltar ao Início</a>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer.html') %>
