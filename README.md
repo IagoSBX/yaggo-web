@@ -1,4 +1,4 @@
-# 🍔 Yag-go Burgers — Delivery Full Stack (Web + Mobile)
+# Yag-go Burgers — Delivery Full Stack (Web + Mobile)
 
 ![Node.js](https://img.shields.io/badge/Node.js-18+-339933?logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-black?logo=express&logoColor=white)
@@ -6,20 +6,20 @@
 ![Sequelize](https://img.shields.io/badge/ORM-Sequelize-52B0E7?logo=sequelize&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Mobile-Flutter-02569B?logo=flutter&logoColor=white)
 
-## 📖 Sobre o projeto
+## Sobre o projeto
 
 O **Yag-go Burgers** é um sistema de delivery construído do zero, cobrindo as duas frentes mais comuns em vagas de desenvolvimento: **back-end web com banco relacional** e **aplicativo mobile**. A ideia foi reproduzir os desafios reais de um e-commerce — sessão de usuário, carrinho que persiste entre visitas, cálculo de subtotal em tempo real e fluxo completo de pedido — sem depender de frameworks prontos de e-commerce.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- 🛍️ Catálogo de produtos por categoria (Hambúrgueres, Combos, Bebidas, Sobremesas)
-- 🛒 Carrinho de compras persistente por sessão, com atualização via AJAX (sem reload de página)
-- 👤 Usuários anônimos identificados automaticamente por `session_id`
-- 📦 Checkout e histórico de pedidos, com snapshot dos itens no momento da compra
-- 📊 Views SQL dedicadas para resumo de carrinho e relatório de pedidos
-- 📱 App mobile em Flutter com a mesma proposta visual e de produto
+- Catálogo de produtos por categoria (Hambúrgueres, Combos, Bebidas, Sobremesas)
+- Carrinho de compras persistente por sessão, com atualização via AJAX (sem reload de página)
+- Usuários anônimos identificados automaticamente por `session_id`
+- Checkout e histórico de pedidos, com snapshot dos itens no momento da compra
+- Views SQL dedicadas para resumo de carrinho e relatório de pedidos
+- App mobile em Flutter com a mesma proposta visual e de produto
 
-## 🧱 Stack técnica
+## Stack técnica
 
 **Back-end / Web**
 - Node.js + Express
@@ -33,7 +33,7 @@ O **Yag-go Burgers** é um sistema de delivery construído do zero, cobrindo as 
 - Provider para gerenciamento de estado
 - Google Fonts
 
-## 🗂️ Estrutura do projeto
+## Estrutura do projeto
 
 ```
 yaggo/
@@ -60,7 +60,7 @@ yaggo/
 └── test/               # Testes do app Flutter
 ```
 
-## 🗃️ Modelo de dados
+## Modelo de dados
 
 | Tabela | Descrição |
 |---|---|
@@ -73,7 +73,7 @@ yaggo/
 
 **Views:** `v_carrinho_resumo` (subtotal do carrinho) e `v_pedidos_completos` (pedidos com contagem de itens).
 
-## 🚀 Como rodar localmente
+## Como rodar localmente
 
 **Pré-requisitos:** Node.js 18+, MySQL 8+ ou MariaDB 10.6+, Flutter 3.3+ (opcional, apenas para o app mobile)
 
@@ -105,19 +105,19 @@ flutter pub get
 flutter run
 ```
 
-## 🔌 API do carrinho (AJAX)
+## API do carrinho (AJAX)
 
 - `POST /cart/add` `{ productId }` → `{ count, subtotal }`
 - `POST /cart/update` `{ productId, action }` → `{ count, subtotal, total, empty }` (`action`: `'inc'` | `'dec'` | `'remove'`)
 
-## 🗺️ Roadmap
+## Roadmap
 
 - [ ] Autenticação real de usuários (login/cadastro)
 - [ ] Painel administrativo para gestão de produtos e pedidos
 - [ ] Integração de pagamento
 - [ ] Testes automatizados no back-end
 
-## 👨‍💻 Autores
+## Autores
 
 Feito por **Iago Santos** em colaboração com **Yago Ribeiro**
 
